@@ -2,6 +2,7 @@ import { Text, View, StyleSheet, SafeAreaView, Pressable } from "react-native";
 import QuestionCard from "../components/QuestionCard";
 import { FontAwesome6 } from "@expo/vector-icons";
 import questions from "../questions";
+import Card from "../components/Card";
 
 const question = questions[0];
 
@@ -15,10 +16,17 @@ const QuizScreen = () => {
         </View>
 
         {/* Body */}
-        <View>
-          <QuestionCard question={question} />
-          <Text style={styles.time}>20 sec</Text>
-        </View>
+        {question ? (
+          <View>
+            <QuestionCard question={question} />
+            <Text style={styles.time}>20 sec</Text>
+          </View>
+        ) : (
+          <Card title="Well done">
+            <Text>Correct Answers: 3/5</Text>
+            <Text>Best score: 10</Text>
+          </Card>
+        )}
 
         {/* Footer */}
         <Pressable
