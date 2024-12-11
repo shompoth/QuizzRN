@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import { useState } from "react";
 import { View } from "react-native";
 import AnswerOption from "./AnswerOption";
 import { Question } from "../types";
@@ -8,11 +8,11 @@ type QuestionCard = {
   question: Question;
 };
 
-const QuestionCard = ({ question }: PropsWithChildren<QuestionCard>) => {
-  const selectedOption = question.options[0];
+const QuestionCard = ({ question }: QuestionCard) => {
+  const [selectedOption, setSelectedOption] = useState<string | undefined>();
 
   const onOptionSelected = (option: string) => {
-    console.warn("Selected: ", option);
+    setSelectedOption(option);
   };
 
   return (
