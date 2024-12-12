@@ -5,10 +5,31 @@ import questions from "../questions";
 import Card from "../components/Card";
 import CustomButton from "../components/CustomButton";
 import { useQuizContext } from "../providers/QuizProvider";
+import { useEffect, useState } from "react";
 
 const QuizScreen = () => {
-  const { question, questionIndex, onNext, score, totalQuestion } =
+  const { question, questionIndex, onNext, score, bestScore, totalQuestion } =
     useQuizContext();
+
+  const [time, setTime] = useState(20);
+
+  useEffect(() => {
+    setTime(20);
+
+    const interval = setTimeout(() => {
+      setTime((t) => t - 1);
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [question]);
+
+  useEffect(() => {
+    if (time <= 0) {
+      onNext();
+    }
+  }, [time]);
 
   return (
     <SafeAreaView style={styles.page}>
@@ -31,7 +52,7 @@ const QuizScreen = () => {
             <Text>
               Correct Answers: {score}/{totalQuestion}
             </Text>
-            <Text>Best score: 10</Text>
+            <Text>Best score: {bestScore}</Text>
           </Card>
         )}
 
