@@ -5,24 +5,17 @@ import questions from "../questions";
 import Card from "../components/Card";
 import CustomButton from "../components/CustomButton";
 import { useQuizContext } from "../providers/QuizProvider";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import useTimer from "../hooks/useTimer";
 
 const QuizScreen = () => {
   const { question, questionIndex, onNext, score, bestScore, totalQuestion } =
     useQuizContext();
 
-  const [time, setTime] = useState(20);
+  const { time, startTimer, clearTimer } = useTimer(20);
 
   useEffect(() => {
-    setTime(20);
-
-    const interval = setTimeout(() => {
-      setTime((t) => t - 1);
-    }, 1000);
-
-    return () => {
-      clearInterval(interval);
-    };
+    clearTimer();
   }, [question]);
 
   useEffect(() => {
@@ -45,7 +38,7 @@ const QuizScreen = () => {
         {question ? (
           <View>
             <QuestionCard question={question} />
-            <Text style={styles.time}>20 sec</Text>
+            <Text style={styles.time}>{time} sec</Text>
           </View>
         ) : (
           <Card title="Well done">
