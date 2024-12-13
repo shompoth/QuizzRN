@@ -1,11 +1,10 @@
-import { Text, View, StyleSheet, SafeAreaView, Pressable } from "react-native";
+import { Text, View, StyleSheet, SafeAreaView } from "react-native";
 import QuestionCard from "../components/QuestionCard";
 import { FontAwesome6 } from "@expo/vector-icons";
-import questions from "../questions";
 import Card from "../components/Card";
 import CustomButton from "../components/CustomButton";
 import { useQuizContext } from "../providers/QuizProvider";
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import useTimer from "../hooks/useTimer";
 
 const QuizScreen = () => {
