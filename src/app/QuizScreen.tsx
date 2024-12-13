@@ -28,9 +28,11 @@ const QuizScreen = () => {
       <View style={styles.container}>
         {/* Header */}
         <View>
-          <Text style={styles.title}>
-            Question {questionIndex + 1}/{totalQuestion}
-          </Text>
+          {questionIndex + 1 <= totalQuestion && (
+            <Text style={styles.title}>
+              Question {questionIndex + 1}/{totalQuestion}
+            </Text>
+          )}
         </View>
 
         {/* Body */}
